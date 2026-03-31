@@ -1,5 +1,16 @@
-let canvas = document.getElementById("myCanvas");
-let pencil = canvas.getContext("2d");
+const myCanvas = document.getElementById("myCanvas");
+const ctx = myCanvas.getContext("2d");
 
-pencil.fillStyle = "green";
-pencil.fill();
+function Ball() {
+ctx.y = "center";
+ctx.x = "center";
+ctx.width = "10";
+ctx.height = "10";
+ctx.force = "0";
+ctx.beginPath();
+ctx.arc(100, 75, 50, 0, 2 * Math.PI);
+ctx.fillStyle = "purple";
+ctx.fill();
+}
+
+var ball = new Ball();
