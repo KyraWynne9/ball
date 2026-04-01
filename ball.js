@@ -1,29 +1,40 @@
-const myCanvas = document.getElementById("myCanvas");
-const ctx = myCanvas.getContext("2d");
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-let x = myCanvas.width / 2;
-let y = myCanvas.height -2;
+// Ball properties
+let x = canvas.width / 2;
+let y = canvas.height / 2;
+const radius = 10;
+
+// Movement speed
 let dx = 2;
-let d = -2;
+let dy = -2;
 
-function Ball() {
+function drawBall() {
 ctx.beginPath();
-ctx.arc(100, 75, 50, 0, 2 * Math.PI);
-ctx.fillStyle = "purple";
+ctx.arc(x, y, radius, 0, Math.PI * 2);
+ctx.fillStyle = "#0095DD";
 ctx.fill();
 ctx.closePath();
+}
+
+function draw() {
+// Clear the canvas
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+// Draw the ball
+drawBall();
+
+// Update position
 x += dx;
 y += dy;
+
+// Bounce off walls
+if (x + radius > canvas.width || x - radius < 0) dx = -dx;
+if (y + radius > canvas.height || y - radius < 0) dy = -dy;
+
+requestAnimationFrame(draw);
 }
 
-var ball = new Ball();
-
-var mainTimer = setInterval(animate, 1000/60);
-
-move();
-
-function animate()
-{
-ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-requestAnimationFrame(move);
-}
+// Start animation
+draw();
